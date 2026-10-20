@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZORO FIX | Premium Workspace</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <a class="brand" href="#">
+                <span class="brand-icon">A</span>
+                <span>ZORO<span class="purple"> FIX</span></span>
+            </a>
+
+            <p class="nav-label">WORKSPACE</p>
+            <button class="nav active" data-filter="all">▦ <span>All Tasks</span><span class="nav-count"
+                    id="allCount">0</span></button>
+            <button class="nav" data-filter="pending">◷ <span>Pending</span></button>
+            <button class="nav" data-filter="progress">◉ <span>In Progress</span></button>
+            <button class="nav" data-filter="completed">✓ <span>Completed</span></button>
+
+            <div class="sidebar-bottom">
+                <div class="focus-card">
+                    <span class="focus-icon">◷</span>
+                    <h3>Stay focused.</h3>
+                    <p>Small steps, big results.</p>
+                    <button class="mini-btn" id="sidebarFocus">Start focus ↗</button>
+                </div>
+                <button class="nav" id="exportBtn">⇩ <span>Export tasks</span></button>
+                <button class="nav" id="themeBtn">☼ <span>Toggle theme</span></button>
+            </div>
+            <div class="profile">
+                <div class="avatar">A</div>
+                <div><strong>My Workspace</strong><small>Personal productivity</small></div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow" id="todayDate">YOUR WORKSPACE</p>
+                    <h1>Dashboard<span class="purple">.</span></h1>
+                </div>
+                <button class="primary-btn" id="addTaskTop">＋ New Task</button>
+            </header>
+
+            <section class="welcome">
+                <div class="welcome-copy">
+                    <span class="welcome-tag">✦ YOUR DAILY SPACE</span>
+                    <h2>Make today<br> <span>count.</span></h2>
+                    <p>Stay organized, protect your focus, and make progress one task at a time.</p>
+                    <button class="welcome-btn" id="welcomeAdd">＋ Create a task</button>
+                </div>
+                <div class="welcome-art">
+                    <div class="art-orbit orbit-one"></div>
+                    <div class="art-orbit orbit-two"></div>
+                    <div class="art-core">✦</div>
+                    <div class="art-chip chip-one">✧ Focus</div>
+                    <div class="art-chip chip-two">✓ Progress</div>
+                </div>
+            </section>
+
+            <section class="stats">
+                <article class="stat-card">
+                    <div class="stat-top"><span>Total tasks</span><span class="stat-icon violet">▦</span></div>
+                    <strong id="totalStat">0</strong><small>Tasks in your workspace</small>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-top"><span>In progress</span><span class="stat-icon blue">◷</span></div>
+                    <strong id="progressStat">0</strong><small>Tasks being worked on</small>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-top"><span>Completed</span><span class="stat-icon green">✓</span></div>
+                    <strong id="completedStat">0</strong><small>Tasks completed</small>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-top"><span>Overdue</span><span class="stat-icon red">!</span></div>
+                    <strong id="overdueStat">0</strong><small>Need your attention</small>
+                </article>
+            </section>
+
+            <section class="content-grid">
+                <div class="panel tasks-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="eyebrow">YOUR PRODUCTIVITY</p>
+                            <h2>Task manager</h2>
+                        </div>
+                        <span class="task-badge" id="visibleCount">0 tasks</span>
+                    </div>
+
+                    <div class="toolbar">
+                        <label class="search-box"><span>⌕</span><input id="searchInput" type="search"
+                                placeholder="Search tasks..."></label>
+                        <select id="priorityFilter" aria-label="Filter by priority">
+                            <option value="all">All priorities</option>
+                            <option value="high">High priority</option>
+                            <option value="medium">Medium priority</option>
+                            <option value="low">Low priority</option>
+                        </select>
+                    </div>
+
+                    <div class="category-tabs">
+                        <button class="category-tab active" data-category="all">All</button>
+                        <button class="category-tab" data-category="Study">Study</button>
+                        <button class="category-tab" data-category="Work">Work</button>
+                        <button class="category-tab" data-category="Personal">Personal</button>
+                    </div>
+
+                    <form id="taskForm" class="task-form">
+                        <div class="form-title-row">
+                            <h3 id="formHeading">Create a new task</h3>
+                            <button type="button" class="text-btn hidden" id="cancelEdit">Cancel edit</button>
+                        </div>
+                        <input id="taskTitle" type="text" maxlength="120" placeholder="What needs to get done?"
+                            required>
+                        <div class="form-grid">
+                            <select id="taskCategory" aria-label="Task category">
+                                <option value="Study">📚 Study</option>
+                                <option value="Work">💻 Work</option>
+                                <option value="Personal">✦ Personal</option>
+                            </select>
+                            <select id="taskPriority" aria-label="Task priority">
+                                <option value="medium">Medium priority</option>
+                                <option value="high">High priority</option>
+                                <option value="low">Low priority</option>
+                            </select>
+                            <input id="taskDeadline" type="date" aria-label="Deadline">
+                        </div>
+                        <button class="primary-btn submit-btn" type="submit" id="submitTask">＋ Add task</button>
+                    </form>
+
+                    <div class="task-list-heading">
+                        <h3>Your tasks</h3><span id="listHint">Everything in one place</span>
+                    </div>
+                    <div id="taskList" class="task-list"></div>
+                    <div id="emptyState" class="empty-state">
+                        <div class="empty-icon">✦</div>
+                        <h3>Fresh start, fresh focus.</h3>
+                        <p>No tasks here yet. Add one above and make it happen.</p>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <section class="panel progress-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="eyebrow">YOUR MOMENTUM</p>
+                                <h2>Daily progress</h2>
+                            </div>
+                        </div>
+                        <div class="progress-ring" id="progressRing">
+                            <div class="ring-inner"><strong id="progressPercent">0%</strong><span>completed</span></div>
+                        </div>
+                        <p class="progress-message" id="progressMessage">Your next win starts with one task.</p>
+                        <div class="progress-track">
+                            <div id="progressBar"></div>
+                        </div>
+                        <div class="progress-foot"><span>Completion rate</span><strong id="progressFoot">0%</strong>
+                        </div>
+                    </section>
+
+                    <section class="panel focus-panel" id="focusPanel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="eyebrow">DEEP WORK</p>
+                                <h2>Focus timer</h2>
+                            </div><span class="focus-live">● FOCUS</span>
+                        </div>
+                        <p class="focus-description">One thing at a time. Give it your full attention.</p>
+                        <div class="timer-mode">
+                            <button class="mode-btn active" data-minutes="25">Focus</button>
+                            <button class="mode-btn" data-minutes="5">Short break</button>
+                            <button class="mode-btn" data-minutes="15">Long break</button>
+                        </div>
+                        <div class="timer-display" id="timerDisplay">25:00</div>
+                        <div class="timer-track">
+                            <div id="timerBar"></div>
+                        </div>
+                        <div class="timer-actions">
+                            <button class="primary-btn" id="timerStart">▶ Start</button>
+                            <button class="secondary-btn" id="timerReset">↺ Reset</button>
+                        </div>
+                        <div class="sessions"><span>Sessions completed</span><strong id="sessionCount">0</strong></div>
+                    </section>
+
+                    <section class="quote-card">
+                        <span>✦ DAILY REMINDER</span>
+                        <p id="quoteText">“Great things are done by a series of small things brought together.”</p>
+                        <small>— Vincent van Gogh</small>
+                    </section>
+                </div>
+            </section>
+
+            <footer>Made for focus. Built for progress. <span>TaskFlow Pro © <span id="year"></span></span></footer>
+        </main>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+
+</html>
